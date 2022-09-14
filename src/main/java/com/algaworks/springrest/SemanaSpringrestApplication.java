@@ -1,13 +1,34 @@
 package com.algaworks.springrest;
 
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.algaworks.springrest.model.Cliente;
+import com.algaworks.springrest.repositories.ClienteRepository;
+
 @SpringBootApplication
-public class SemanaSpringrestApplication {
+public class SemanaSpringrestApplication implements CommandLineRunner {
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SemanaSpringrestApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		
+		Cliente cliente1 = new Cliente(1L, "José da Silva", "jose@ig.com.br", "1565874587");
+		Cliente cliente2 = new Cliente(2L, "Maria da Silva", "maria@ig.com.br", "1598745236");
+		Cliente cliente3 = new Cliente(3L, "João Pereira", "joaoa@hotmail.com.br", "1545876325");
+		Cliente cliente4 = new Cliente(4L, "Marcia Antunes", "marcia@microsoft.com.br", "157458962");
+		
+		clienteRepository.saveAll(Arrays.asList(cliente1, cliente2, cliente3, cliente4));
 	}
 
 }
