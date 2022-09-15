@@ -36,5 +36,17 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		return handleExceptionInternal(ex, error, headers, status, request);
 	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(BusinessException.class)
+	public ResponseEntity<Object> handleBusiness(BusinessException ex, WebRequest request){
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ExceptionError error = new ExceptionError();
+		error.setDataHora(LocalDateTime.now());
+		error.setStatus(status.value());
+		error.setTitulo(ex.getMessage());
+		
+		return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
+	}
 
 }

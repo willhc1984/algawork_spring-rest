@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.springrest.model.Cliente;
 import com.algaworks.springrest.repositories.ClienteRepository;
+import com.algaworks.springrest.services.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
@@ -26,6 +27,9 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private ClienteService clienteService;
 	
 	@GetMapping
 	public ResponseEntity<List<Cliente>> buscarTodos(){
@@ -49,7 +53,7 @@ public class ClienteController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente salvar(@Valid @RequestBody Cliente cliente){
-		return clienteRepository.save(cliente);
+		return clienteService.salvar(cliente);
 	}
 	
 	@PutMapping(value = "/{id}")
@@ -59,7 +63,7 @@ public class ClienteController {
 		}
 		
 		cliente.setId(id);
-		clienteRepository.save(cliente);
+		clienteService.salvar(cliente);
 		
 		return ResponseEntity.ok(cliente);
 	}
@@ -70,7 +74,7 @@ public class ClienteController {
 			return ResponseEntity.notFound().build();
 		}
 		
-		clienteRepository.deleteById(id);
+		clienteService.excluir(id);
 		return ResponseEntity.noContent().build();
 	}
 	
