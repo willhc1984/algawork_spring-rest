@@ -17,6 +17,9 @@ public class Destinatario {
 	@Column(name = "destinatario_bairro")
 	private String bairro;
 	
+	public Destinatario() {
+	}
+	
 	public Destinatario(String nome, String logradouro, String numero, String complemento, String bairro) {
 		this.nome = nome;
 		this.logradouro = logradouro;
