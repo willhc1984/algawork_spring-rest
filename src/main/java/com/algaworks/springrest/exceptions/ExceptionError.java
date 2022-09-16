@@ -1,6 +1,7 @@
 package com.algaworks.springrest.exceptions;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,14 +11,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class ExceptionError {
 	
 	private Integer status;
-	private LocalDateTime dataHora;
+	private OffsetDateTime dataHora;
 	private String titulo;
 	private List<Error> errors;
 	
 	public ExceptionError() {
 	}
 	
-	public ExceptionError(Integer status, LocalDateTime dataHora, String titulo, List<Error> errors) {
+	public ExceptionError(Integer status, OffsetDateTime dataHora, String titulo, List<Error> errors) {
 		super();
 		this.status = status;
 		this.dataHora = dataHora;
@@ -32,11 +33,11 @@ public class ExceptionError {
 		this.status = status;
 	}
 
-	public LocalDateTime getDataHora() {
+	public OffsetDateTime getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(LocalDateTime dataHora) {
+	public void setDataHora(OffsetDateTime dataHora) {
 		this.dataHora = dataHora;
 	}
 

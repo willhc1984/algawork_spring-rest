@@ -3,6 +3,7 @@ package com.algaworks.springrest.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Embedded;
@@ -36,10 +37,10 @@ public class Entrega implements Serializable{
 	private BigDecimal taxa;
 	
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataPedido;
+	private OffsetDateTime dataPedido;
 	
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataFinalizacao;
+	private OffsetDateTime dataFinalizacao;
 	
 	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
@@ -59,8 +60,8 @@ public class Entrega implements Serializable{
 	public Entrega() {
 	}
 	
-	public Entrega(Long id, BigDecimal taxa, StatusEntrega status, LocalDateTime dataPedido,
-			LocalDateTime dataFinalizacao, Cliente cliente, Destinatario destinatario) {
+	public Entrega(Long id, BigDecimal taxa, StatusEntrega status, OffsetDateTime dataPedido,
+			OffsetDateTime dataFinalizacao, Cliente cliente, Destinatario destinatario) {
 		super();
 		this.id = id;
 		this.taxa = taxa;
@@ -95,19 +96,19 @@ public class Entrega implements Serializable{
 		this.status = status;
 	}
 
-	public LocalDateTime getDataPedido() {
+	public OffsetDateTime getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(LocalDateTime dataPedido) {
+	public void setDataPedido(OffsetDateTime dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
-	public LocalDateTime getDataFinalizacao() {
+	public OffsetDateTime getDataFinalizacao() {
 		return dataFinalizacao;
 	}
 
-	public void setDataFinalizacao(LocalDateTime dataFinalizacao) {
+	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
 		this.dataFinalizacao = dataFinalizacao;
 	}
 

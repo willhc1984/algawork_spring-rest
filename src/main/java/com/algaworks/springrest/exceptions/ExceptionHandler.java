@@ -1,6 +1,6 @@
 package com.algaworks.springrest.exceptions;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		}
 		
 		ExceptionError error = new ExceptionError();
-		error.setDataHora(LocalDateTime.now());
+		error.setDataHora(OffsetDateTime.now());
 		error.setStatus(status.value());
 		error.setTitulo("Um ou mais campos inválidos!");
 		error.setErrors(errors);
@@ -42,7 +42,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		
 		ExceptionError error = new ExceptionError();
-		error.setDataHora(LocalDateTime.now());
+		error.setDataHora(OffsetDateTime.now());
 		error.setStatus(status.value());
 		error.setTitulo(ex.getMessage());
 		

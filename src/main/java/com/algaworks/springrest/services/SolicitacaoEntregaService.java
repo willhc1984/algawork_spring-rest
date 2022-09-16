@@ -1,17 +1,15 @@
 package com.algaworks.springrest.services;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.algaworks.springrest.exceptions.BusinessException;
 import com.algaworks.springrest.model.Cliente;
 import com.algaworks.springrest.model.Entrega;
 import com.algaworks.springrest.model.StatusEntrega;
-import com.algaworks.springrest.repositories.ClienteRepository;
 import com.algaworks.springrest.repositories.EntregaRepository;
 
 @Service
@@ -30,7 +28,7 @@ public class SolicitacaoEntregaService {
 		
 		entrega.setCliente(cliente);
 		entrega.setStatus(StatusEntrega.PENDENTE);
-		entrega.setDataPedido(LocalDateTime.now());
+		entrega.setDataPedido(OffsetDateTime.now());
 		
 		return entregaRepository.save(entrega);
 
