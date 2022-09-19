@@ -132,6 +132,21 @@ public class Entrega implements Serializable{
 	public void setDestinatario(Destinatario destinatario) {
 		this.destinatario = destinatario;
 	}
+	
+	public List<Ocorrencia> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public Ocorrencia adicionarOcorrencia(String descricao) {
+		Ocorrencia ocorrencia = new Ocorrencia();
+		ocorrencia.setDescricao(descricao);
+		ocorrencia.setDataRegistro(OffsetDateTime.now());
+		ocorrencia.setEntrega(this);		
+		
+		this.getOcorrencias().add(ocorrencia);
+		
+		return ocorrencia;
+	}
 
 	@Override
 	public int hashCode() {

@@ -28,6 +28,9 @@ public class Ocorrencia implements Serializable{
 	
 	private OffsetDateTime dataRegistro;
 	
+	public Ocorrencia() {
+	}
+	
 	public Ocorrencia(Long id, Entrega entrega, String descricao, OffsetDateTime dataRegistro) {
 		super();
 		this.id = id;
