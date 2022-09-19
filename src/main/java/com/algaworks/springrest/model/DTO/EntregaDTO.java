@@ -11,7 +11,7 @@ public class EntregaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private String nomeCliente;
+	private ClienteResumoDTO cliente;
 	private DestinatarioDTO destinatario;
 	private BigDecimal taxa;
 	private StatusEntrega status;
@@ -20,12 +20,12 @@ public class EntregaDTO implements Serializable{
 	
 	public EntregaDTO() {
 	}
-	
-	public EntregaDTO(Long id, String nomeCliente, DestinatarioDTO destinatario, BigDecimal taxa, StatusEntrega status,
-			OffsetDateTime dataPedido, OffsetDateTime dataFinalizacao) {
+
+	public EntregaDTO(Long id, ClienteResumoDTO cliente, DestinatarioDTO destinatario, BigDecimal taxa,
+			StatusEntrega status, OffsetDateTime dataPedido, OffsetDateTime dataFinalizacao) {
 		super();
 		this.id = id;
-		this.nomeCliente = nomeCliente;
+		this.cliente = cliente;
 		this.destinatario = destinatario;
 		this.taxa = taxa;
 		this.status = status;
@@ -41,12 +41,12 @@ public class EntregaDTO implements Serializable{
 		this.id = id;
 	}
 
-	public String getNomeCliente() {
-		return nomeCliente;
+	public ClienteResumoDTO getCliente() {
+		return cliente;
 	}
 
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setCliente(ClienteResumoDTO cliente) {
+		this.cliente = cliente;
 	}
 
 	public DestinatarioDTO getDestinatario() {
@@ -88,6 +88,7 @@ public class EntregaDTO implements Serializable{
 	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
 		this.dataFinalizacao = dataFinalizacao;
 	}
+	
 	
 
 }
