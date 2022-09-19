@@ -2,8 +2,9 @@ package com.algaworks.springrest.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Embedded;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -45,6 +47,9 @@ public class Entrega implements Serializable{
 	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private StatusEntrega status;
+	
+	@OneToMany(mappedBy = "entrega")
+	private List<Ocorrencia> ocorrencias = new ArrayList<>();
 	
 	@Valid 
 	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
