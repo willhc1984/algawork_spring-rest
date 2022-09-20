@@ -29,6 +29,7 @@ public class Cliente implements Serializable{
 	@Size(max = 100)
 	private String nome;
 	
+	@NotBlank
 	@Email
 	@Size(max = 255)
 	private String email;

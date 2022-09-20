@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<title>Delivery System</title>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Home</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+				aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Entregas
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="#">Solicitar entrega</a></li>
+							<li><a class="dropdown-item" href="#">Registrar ocorrencia</a></li>
+							<li><a class="dropdown-item" href="#">Visualizar entregas</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Clientes
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="cad-clientes.html">Cadastrar</a></li>
+							<li><a class="dropdown-item" href="lista-clientes.html">Visualizar</a></li>
+
+						</ul>
+					</li>
+				</ul>
+				<form class="d-flex">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Pesquisar</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<div style="padding: 60px;">
+		<form method="" id="formCadCli">
+			<div class="mb-3">
+				<label for="id" class="form-label">ID</label>
+				<input type="text" class="form-control" id="id" disabled />
+			</div>
+			<div class="mb-3">
+				<label for="nome" class="form-label">Nome</label>
+				<input type="text" class="form-control" id="nome" />
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email</label>
+				<input type="email" class="form-control" id="email">
+			</div>
+			<div class="mb-3">
+				<label for="telefone" class="form-label">Telefone</label>
+				<input type="number" class="form-control" id="telefone">
+			</div>
+
+			<button type="button" class="btn btn-primary" onclick="salvarCliente()">Salvar</button>
+			<button type="button" class="btn btn-secondary" onclick="document.getElementById('formCadCli').reset();">Novo</button>
+		</form method="" id="formCadCli">
+	</div>
+
+	<script type="text/javascript">
+		function salvarCliente() {
+			var id = $("#id").val();
+			var nome = $("#nome").val();
+			var email = $("#email").val();
+			var telefone = $("#telefone").val();
+
+			$.ajax({
+				method: "POST",
+				url: "clientes",
+				data: JSON.stringify({
+					id: id,
+					nome: nome,
+					email: email,
+					telefone: telefone
+				}),
+				contentType: "application/json; charset-utf-8",
+				success: function (response) {
+					$("#id").val(response.id);
+					alert("Cliente cadastrado!")
+				}
+			}).fail(function (xhr, status, errorThrown) {
+				alert("Erros ao cadastrar cliente " + xhr.responseText);
+			})
+
+		}
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>
