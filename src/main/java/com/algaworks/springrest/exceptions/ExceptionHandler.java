@@ -48,5 +48,17 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
 	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException ex, WebRequest request){
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		
+		ExceptionError error = new ExceptionError();
+		error.setDataHora(OffsetDateTime.now());
+		error.setStatus(status.value());
+		error.setTitulo(ex.getMessage());
+		
+		return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
+	}
 
 }
