@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
+import com.algaworks.springrest.exceptions.BusinessException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -164,6 +165,15 @@ public class Entrega implements Serializable{
 			return false;
 		Entrega other = (Entrega) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public void finalizar() {
+		if(!StatusEntrega.PENDENTE.equals(getStatus())) {
+			throw new BusinessException("Entrega não pode ser finalizada!");
+		}
+		
+		setStatus(StatusEntrega.FINALIZADA);
+		setDataFinalizacao(OffsetDateTime.now());
 	}
 
 }
