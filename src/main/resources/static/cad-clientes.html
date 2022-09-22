@@ -56,40 +56,24 @@
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
-					<form class="d-flex">
-						<input class="form-control me-2" type="search" placeholder="Informe o nome" aria-label="Search" id="buscarPorNome">
-						<button class="btn btn-outline-success" type="submit"
-							onclick="pesquisarCliente()">Pesquisar</button>
-					</form>
+					<input class="form-control me-2" type="text" placeholder="Informe o nome" aria-label="Search"
+						id="buscarPorNome">
+					<button class="btn btn-outline-success" type="submit"
+						onclick="pesquisarCliente()">Pesquisar</button>
 				</div>
 				<div class="modal-body">
-					<table class="table" id="tabelaResultado">
+					<table class="table" id="tabela">
 						<thead>
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Nome</th>
 								<th scope="col">Email</th>
 								<th scope="col">Telefone</th>
+								<th scope="col">Ações</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td colspan="2">Larry the Bird</td>
-								<td>@twitter</td>
-							</tr>
+						<tbody id="resultados">
+
 						</tbody>
 					</table>
 				</div>
@@ -115,29 +99,48 @@
 	</script>
 
 	<script type="text/javascript">
-
-		function pesquisarCliente(){
-			var nome = $('#buscarPorNome').val();
-
-			if(nome != null && nome.trim() != ''){
-				$.ajax({
+	
+		function colocarEmEdicao(id) {
+			$.ajax({
 				method: "GET",
-				url: "clientes",
-				data: JSON.stringify({
-					id: id,
-					nome: nome,
-					email: email,
-					telefone: telefone
-				}),
-				contentType: "application/json; charset-utf-8",
+				url: "clientes/"+id,
+				data: "id=" + id,
 				success: function (response) {
 					$("#id").val(response.id);
-					alert("Cliente cadastrado!")
+					$("#nome").val(response.nome);
+					$("#email").val(response.email);
+					$("#telefone").val(response.telefone);
+					$("#modalPesquisar").modal('hide');
 				}
 			}).fail(function (xhr, status, errorThrown) {
-				alert("Erros ao cadastrar cliente " + xhr.responseText);
-				document.getElementById('nomeError').innerHTML = xhr.responseText;
+				alert("Erro ao buscar cliente." + xhr.responseText);
 			})
+		}
+
+		function pesquisarCliente() {
+			
+			var nome = $('#buscarPorNome').val();
+			if (nome != null && nome.trim() != '') {
+				$.ajax({
+					method: "GET",
+					url: "clientes/buscarPorNome",
+					data: "nome=" + nome,
+					success: function (response) {
+						document.getElementById('resultados').innerHTML = '';
+						for (var i = 0; i < response.length; i++) {
+							$('#tabela > tbody').append('<tr>');
+							$('#tabela > tbody').append('<td>' + response[i].id + '</td>');
+							$('#tabela > tbody').append('<td>' + response[i].nome + '</td>');
+							$('#tabela > tbody').append('<td>' + response[i].email + '</td>');
+							$('#tabela > tbody').append('<td>' + response[i].telefone + '</td>');
+							$('#tabela > tbody').append('<td><button type="button" onClick="colocarEmEdicao(' + response[i].id + ')" class="btn btn-link">Editar</button></td>');
+							$('#tabela > tbody').append('<td><button type="button" class="btn btn-link">Excluir</button></td>');
+							$('#tabela > tbody').append('</tr>');
+						}
+					}
+				}).fail(function (xhr, status, errorThrown) {
+					alert("Erro ao buscar cliente " + xhr.responseText);
+				})
 			}
 		}
 
@@ -165,7 +168,6 @@
 				alert("Erros ao cadastrar cliente " + xhr.responseText);
 				document.getElementById('nomeError').innerHTML = xhr.responseText;
 			})
-
 		}
 	</script>
 

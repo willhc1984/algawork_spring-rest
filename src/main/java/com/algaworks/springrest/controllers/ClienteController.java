@@ -39,8 +39,8 @@ public class ClienteController {
 	}
 	
 	@GetMapping(value = "/buscarPorNome")
-	public ResponseEntity<List<Cliente>> buscarPorNome(@RequestParam String nome){
-		List<Cliente> clientes = clienteRepository.buscarPorNome(nome);
+	public ResponseEntity<List<Cliente>> buscarPorNome(@RequestParam(name = "nome") String nome){
+		List<Cliente> clientes = clienteRepository.buscarPorNome(nome.trim().toUpperCase());
 		return ResponseEntity.ok(clientes);
 	}
 	

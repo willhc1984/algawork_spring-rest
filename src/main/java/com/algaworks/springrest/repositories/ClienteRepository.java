@@ -14,7 +14,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	
 	Optional<Cliente> findByEmail(String email);
 	
-	@Query("select c from Cliente c where c.nome like %?1%")
+	@Query("select c from Cliente c where upper(trim(c.nome)) like %?1%")
 	List<Cliente> buscarPorNome(String nome);
 
 }
