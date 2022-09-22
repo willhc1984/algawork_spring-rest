@@ -7,63 +7,35 @@
 
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 	<title>Delivery System</title>
+
 </head>
 
 <body>
 
-	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Home</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-				aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Entregas
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">Solicitar entrega</a></li>
-							<li><a class="dropdown-item" href="#">Registrar ocorrencia</a></li>
-							<li><a class="dropdown-item" href="#">Visualizar entregas</a></li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Clientes
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="cad-clientes.html">Cadastrar</a></li>
-							<li><a class="dropdown-item" href="lista-clientes.html">Visualizar</a></li>
-
-						</ul>
-					</li>
-				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Pesquisar</button>
-				</form>
-			</div>
-		</div>
-	</nav>
+	<div id="navbar"></div>
 
 	<div class="container">
 		<div style="text-align: center; padding: 60px;">
-			<h1>DeliverySystem - sistema de entregas</h1>
-			<img src="logodelivery.png" alt="Logo delivery" class="img-fluid rounded" style="padding : 60px" />
+			<h1>ExpressDelivery - sistema de entregas</h1>
+			<img src="logodelivery.jpg" alt="Logo delivery" class="img-fluid rounded" style="padding : 60px" />
 		</div>
 	</div>
-
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	
+	<div id="footer"></div>	
+	
+	<script>
+		$(function () {
+			$("#navbar").load("navbar.html");
+			$("#footer").load("footer.html");
+		});
+	</script>
 
 </body>
 

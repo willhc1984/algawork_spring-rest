@@ -13,47 +13,10 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Home</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-				aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Entregas
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">Solicitar entrega</a></li>
-							<li><a class="dropdown-item" href="#">Registrar ocorrencia</a></li>
-							<li><a class="dropdown-item" href="#">Visualizar entregas</a></li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Clientes
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="cad-clientes.html">Cadastrar</a></li>
-							<li><a class="dropdown-item" href="lista-clientes.html">Visualizar</a></li>
+	<div id="navbar"></div>
 
-						</ul>
-					</li>
-				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Pesquisar</button>
-				</form>
-			</div>
-		</div>
-	</nav>
-
-	<div style="padding: 60px;">
+	<h1>Cadastro de clientes</h1>
+	<div style="padding: 30px;">
 		<form method="" id="formCadCli">
 			<div class="mb-3">
 				<label for="id" class="form-label">ID</label>
@@ -73,11 +36,111 @@
 			</div>
 
 			<button type="button" class="btn btn-primary" onclick="salvarCliente()">Salvar</button>
-			<button type="button" class="btn btn-secondary" onclick="document.getElementById('formCadCli').reset();">Novo</button>
-		</form method="" id="formCadCli">
+			<button type="button" class="btn btn-secondary"
+				onclick="document.getElementById('formCadCli').reset();">Novo</button>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalPesquisar">
+				Pesquisar
+			</button>
+		</form>
+		<div class="invalid-feedback">
+			<h1 id="nomeError"></h1>
+		</div>
 	</div>
 
+	<div id="footer"></div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalPesquisar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<form class="d-flex">
+						<input class="form-control me-2" type="search" placeholder="Informe o nome" aria-label="Search" id="buscarPorNome">
+						<button class="btn btn-outline-success" type="submit"
+							onclick="pesquisarCliente()">Pesquisar</button>
+					</form>
+				</div>
+				<div class="modal-body">
+					<table class="table" id="tabelaResultado">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Email</th>
+								<th scope="col">Telefone</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>Jacob</td>
+								<td>Thornton</td>
+								<td>@fat</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td colspan="2">Larry the Bird</td>
+								<td>@twitter</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Understood</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
 	<script type="text/javascript">
+		$(function () {
+			$("#navbar").load("navbar.html");
+			$("#footer").load("footer.html");
+		});
+	</script>
+
+	<script type="text/javascript">
+
+		function pesquisarCliente(){
+			var nome = $('#buscarPorNome').val();
+
+			if(nome != null && nome.trim() != ''){
+				$.ajax({
+				method: "GET",
+				url: "clientes",
+				data: JSON.stringify({
+					id: id,
+					nome: nome,
+					email: email,
+					telefone: telefone
+				}),
+				contentType: "application/json; charset-utf-8",
+				success: function (response) {
+					$("#id").val(response.id);
+					alert("Cliente cadastrado!")
+				}
+			}).fail(function (xhr, status, errorThrown) {
+				alert("Erros ao cadastrar cliente " + xhr.responseText);
+				document.getElementById('nomeError').innerHTML = xhr.responseText;
+			})
+			}
+		}
+
 		function salvarCliente() {
 			var id = $("#id").val();
 			var nome = $("#nome").val();
@@ -100,16 +163,11 @@
 				}
 			}).fail(function (xhr, status, errorThrown) {
 				alert("Erros ao cadastrar cliente " + xhr.responseText);
+				document.getElementById('nomeError').innerHTML = xhr.responseText;
 			})
 
 		}
 	</script>
-
-	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
 
 </body>
 

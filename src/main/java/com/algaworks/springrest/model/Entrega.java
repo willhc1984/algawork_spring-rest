@@ -150,6 +150,15 @@ public class Entrega implements Serializable{
 		return ocorrencia;
 	}
 
+	public void finalizar() {
+		if(!StatusEntrega.PENDENTE.equals(getStatus())) {
+			throw new BusinessException("Entrega não pode ser finalizada!");
+		}
+		
+		setStatus(StatusEntrega.FINALIZADA);
+		setDataFinalizacao(OffsetDateTime.now());
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -165,15 +174,6 @@ public class Entrega implements Serializable{
 			return false;
 		Entrega other = (Entrega) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	public void finalizar() {
-		if(!StatusEntrega.PENDENTE.equals(getStatus())) {
-			throw new BusinessException("Entrega não pode ser finalizada!");
-		}
-		
-		setStatus(StatusEntrega.FINALIZADA);
-		setDataFinalizacao(OffsetDateTime.now());
 	}
 
 }
