@@ -1,6 +1,5 @@
 package com.algaworks.springrest.exceptions;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 

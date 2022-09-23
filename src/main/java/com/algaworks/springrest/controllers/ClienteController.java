@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.springrest.exceptions.IntegrityViolation;
 import com.algaworks.springrest.model.Cliente;
 import com.algaworks.springrest.repositories.ClienteRepository;
 import com.algaworks.springrest.services.ClienteService;
@@ -81,7 +83,12 @@ public class ClienteController {
 			return ResponseEntity.notFound().build();
 		}
 		
-		clienteService.excluir(id);
+		try {
+			clienteService.excluir(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new IntegrityViolation("Erro ao excluir: erro de integridade de dados.");
+		}
+		
 		return ResponseEntity.noContent().build();
 	}
 	

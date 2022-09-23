@@ -60,5 +60,20 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
 	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(IntegrityViolation.class)
+	public ResponseEntity<Object> handleIntegrityViolation(IntegrityViolation ex, WebRequest request){
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ExceptionError error = new ExceptionError();
+		error.setDataHora(OffsetDateTime.now());
+		error.setStatus(status.value());
+		error.setTitulo(ex.getMessage());
+		
+		return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
+	}
+	
+	
+	
 
 }
