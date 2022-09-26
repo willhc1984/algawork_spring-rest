@@ -41,7 +41,7 @@ public class Entrega implements Serializable{
 	private BigDecimal taxa;
 	
 	@JsonProperty(access = Access.READ_ONLY)
-	private OffsetDateTime dataPedido;
+	private OffsetDateTime dataPedido = OffsetDateTime.now();
 	
 	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataFinalizacao;

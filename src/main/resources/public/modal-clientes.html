@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal fade" id="modalPesquisar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<input class="form-control me-2" type="text" placeholder="Informe o nome" aria-label="Search"
+					id="buscarPorNome">
+				<button class="btn btn-outline-success" type="submit" onclick="pesquisarCliente()">Pesquisar</button>
+			</div>
+			<div class="modal-body">
+				<table class="table" id="tabela">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Email</th>
+							<th scope="col">Telefone</th>
+							<th scope="col">Ações</th>
+						</tr>
+					</thead>
+					<tbody id="resultados">
+
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

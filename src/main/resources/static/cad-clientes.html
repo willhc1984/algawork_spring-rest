@@ -14,10 +14,13 @@
 <body>
 
 	<div id="navbar"></div>
+	<div id="modal"></div>
 
 	<h1>Cadastro de clientes</h1>
+	
 	<div style="padding: 30px;">
 		<form method="" id="formCadCli">
+			<div id="msgs"></div>
 			<div class="mb-3">
 				<label for="id" class="form-label">ID</label>
 				<input type="text" class="form-control" id="id" disabled />
@@ -38,148 +41,21 @@
 			<button type="button" class="btn btn-primary" onclick="salvarCliente()">Salvar</button>
 			<button type="button" class="btn btn-secondary"
 				onclick="document.getElementById('formCadCli').reset();">Novo</button>
+			<button type="button" class="btn btn-danger" onclick="botaoDeletar()">Excluir</button>
 			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalPesquisar">
 				Pesquisar
 			</button>
 		</form>
-		<div class="invalid-feedback">
-			<h1 id="nomeError"></h1>
-		</div>
+
 	</div>
 
 	<div id="footer"></div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="modalPesquisar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<input class="form-control me-2" type="text" placeholder="Informe o nome" aria-label="Search"
-						id="buscarPorNome">
-					<button class="btn btn-outline-success" type="submit"
-						onclick="pesquisarCliente()">Pesquisar</button>
-				</div>
-				<div class="modal-body">
-					<table class="table" id="tabela">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Nome</th>
-								<th scope="col">Email</th>
-								<th scope="col">Telefone</th>
-								<th scope="col">Ações</th>
-							</tr>
-						</thead>
-						<tbody id="resultados">
-
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./scripts-cliente.js"></script>
 
-	<script type="text/javascript">
-		$(function () {
-			$("#navbar").load("navbar.html");
-			$("#footer").load("footer.html");
-		});
-	</script>
-
-	<script type="text/javascript">
-	
-		function colocarEmEdicao(id) {
-			$.ajax({
-				method: "GET",
-				url: "clientes/"+id,
-				data: "id=" + id,
-				success: function (response) {
-					$("#id").val(response.id);
-					$("#nome").val(response.nome);
-					$("#email").val(response.email);
-					$("#telefone").val(response.telefone);
-					$("#modalPesquisar").modal('hide');
-				}
-			}).fail(function (xhr, status, errorThrown) {
-				alert("Erro ao buscar cliente." + xhr.responseText);
-			})
-		}
-
-		function pesquisarCliente() {
-			
-			var nome = $('#buscarPorNome').val();
-			if (nome != null && nome.trim() != '') {
-				$.ajax({
-					method: "GET",
-					url: "clientes/buscarPorNome",
-					data: "nome=" + nome,
-					success: function (response) {
-						document.getElementById('resultados').innerHTML = '';
-						for (var i = 0; i < response.length; i++) {
-							$('#tabela > tbody').append('<tr id="'+response[i].id+'">');
-							$('#tabela > tbody').append('<td>' + response[i].id + '</td>');
-							$('#tabela > tbody').append('<td>' + response[i].nome + '</td>');
-							$('#tabela > tbody').append('<td>' + response[i].email + '</td>');
-							$('#tabela > tbody').append('<td>' + response[i].telefone + '</td>');
-							$('#tabela > tbody').append('<td><a href="#" onClick="colocarEmEdicao(' + response[i].id + ')"><i class="fa-solid fa-file-pen"></i></a></td>');
-							$('#tabela > tbody').append('<td><a href="#" onClick="excluirCliente('+ response[i].id +')"><i class="fa-solid fa-trash"></i></a></td>');
-							$('#tabela > tbody').append('</tr>');
-						}
-					}
-				}).fail(function (xhr, status, errorThrown) {
-					alert("Erro ao buscar cliente " + xhr.responseText);
-				})
-			}
-		}
-		
-		function excluirCliente(id){
-			$.ajax({
-				method: "DELETE",
-				url: "clientes/"+id,
-				data: "id=" + id,
-				success: function (response) {
-					pesquisarCliente();
-					alert("Cliente excluido!");
-				}
-			}).fail(function (xhr, status, errorThrown) {
-				alert("Erro ao excluir cliente." + xhr.responseText);
-			})
-		}
-
-		function salvarCliente() {
-			var id = $("#id").val();
-			var nome = $("#nome").val();
-			var email = $("#email").val();
-			var telefone = $("#telefone").val();
-
-			$.ajax({
-				method: "POST",
-				url: "clientes",
-				data: JSON.stringify({
-					id: id,
-					nome: nome,
-					email: email,
-					telefone: telefone
-				}),
-				contentType: "application/json; charset-utf-8",
-				success: function (response) {
-					$("#id").val(response.id);
-					alert("Cliente cadastrado!")
-				}
-			}).fail(function (xhr, status, errorThrown) {
-				alert("Erros ao cadastrar cliente " + xhr.responseText);
-				document.getElementById('nomeError').innerHTML = xhr.responseText;
-			})
-		}
-	</script>
 
 </body>
 
