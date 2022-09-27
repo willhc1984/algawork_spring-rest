@@ -3,6 +3,21 @@ function limparForm() {
 	$('#msgs').hide();
 }
 
+function finalizarEntrega(id) {
+	$.ajax({
+		method: "PUT",
+		url: "entregas/"+id+"/finalizacao",
+		success: function(response) {
+			alert("Entrega finalizada!");
+			$("#msgs").html("<div class='alert alert-success'>Entrega finalizada!</div>");
+			listarEntregas();
+		}
+	}).fail(function(xhr, status, errorThrown) {
+		alert("Entrega já está finalizada!" + xhr.responseText);
+		$("#msgs").html("<div class='alert alert-danger'>Entrega já está finalizada!</div>");
+	})
+}
+
 function listarEntregas() {
 	$.ajax({
 		method: "GET",
@@ -20,9 +35,9 @@ function listarEntregas() {
 				$('#resultados').append('<td>' + response[i].destinatario.complemento + '</td>');
 				$('#resultados').append('<td>' + response[i].taxa + '</td>');
 				$('#resultados').append('<td>' + response[i].dataPedido + '</td>');
-				$('#resultados').append('<td>' + response[i].dataFinalizacao+ '</td>');
+				$('#resultados').append('<td>' + response[i].dataFinalizacao + '</td>');
 				$('#resultados').append('<td>' + response[i].status + '</td>');
-				$('#resultados').append('<td><a href="#" onClick="excluirCliente(' + response[i].id + ')"><i class="fa-solid fa-square-check"></i></a></td>');
+				$('#resultados').append('<td><a href="#" onClick="finalizarEntrega(' + response[i].id + ')"><i class="fa-solid fa-square-check" data-toggle="tooltip" data-placement="top" title="Finalizar pedido"></i></a></td>');
 				$('#resultados').append('</tr>');
 			}
 		}
@@ -95,3 +110,5 @@ function salvarSolicitacaoEntrega() {
 		$('#msgs').show();
 	})
 }
+
+

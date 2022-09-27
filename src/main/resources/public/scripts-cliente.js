@@ -82,10 +82,12 @@ function excluirCliente(id) {
 				listarClientes();
 				$('#msgs').html("<div class='alert alert-success'>Cliente excluido!</div>");
 				alert("Cliente excluido!");
+				$('#msgs').show();
 			}
 		}).fail(function(xhr, status, errorThrown) {
 			alert("Erro ao excluir cliente." + xhr.responseText);
 			$('#msgs').html("<div class='alert alert-danger'>"+ xhr.responseText+"</div>");
+			$('#msgs').show();
 		})
 	}
 }
@@ -96,8 +98,8 @@ function botaoDeletar() {
 		excluirCliente(id);
 		$('#msgs').html("<div class='alert alert-success'>Cliente excluido!</div>");
 		document.getElementById('formCadCli').reset();
+		$('#msgs').show();
 	}
-
 }
 
 function salvarCliente() {
@@ -121,9 +123,11 @@ function salvarCliente() {
 			$("#id").val(response.id);
 			alert("Cliente cadastrado!");
 			$('#msgs').html("<div class='alert alert-success'>Cliente cadastrado!</div>");
+			$('#msgs').show();
 		}
 	}).fail(function(xhr, status, errorThrown) {
 		alert("Erros ao cadastrar cliente " + xhr.responseText);
 		$('#msgs').html("<div class='alert alert-danger'>" + xhr.responseText + "</div>");
+		$('#msgs').show();
 	})
 }
