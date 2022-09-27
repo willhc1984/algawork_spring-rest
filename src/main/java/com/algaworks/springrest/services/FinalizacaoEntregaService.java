@@ -19,8 +19,7 @@ public class FinalizacaoEntregaService {
 	
 	@Transactional
 	public void finalizar(Long entregaId) {
-		Entrega entrega = buscaEntregaService.buscar(entregaId);
-		
+		Entrega entrega = buscaEntregaService.buscar(entregaId);		
 		entrega.finalizar();
 		
 		entregaRepository.save(entrega);
