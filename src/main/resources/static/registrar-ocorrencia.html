@@ -16,44 +16,37 @@
 	<div id="navbar"></div>
 	<div id="modal"></div>
 
-	<h1>Cadastro de clientes</h1>
-
+	<h1>Registrar ocorrencias</h1>
+	
 	<div style="padding: 30px;">
-		<form method="" id="formCadCli">
+		<form method="" id="formRegistrarOcorrencia">
 			<div id="msgs"></div>
 			<div class="mb-3">
-				<label for="id" class="form-label">ID</label>
-				<input type="text" class="form-control" id="id" disabled />
+				<label for="id" class="form-label">ID da entrega</label>
+				<input type="number" class="form-control" id="idEntrega" />
 			</div>
 			<div class="mb-3">
-				<label for="nome" class="form-label">Nome</label>
-				<input type="text" class="form-control" id="nome" />
-			</div>
-			<div class="mb-3">
-				<label for="email" class="form-label">Email</label>
-				<input type="email" class="form-control" id="email">
-			</div>
-			<div class="mb-3">
-				<label for="telefone" class="form-label">Telefone</label>
-				<input type="number" class="form-control" id="telefone">
+				<label for="descricao" class="form-label">Descrição do ocorrido</label>
+				<input type="text" class="form-control" id="descricao" />
 			</div>
 
-			<button type="button" class="btn btn-primary" onclick="salvarCliente()">Salvar</button>
+			<button type="button" class="btn btn-primary" onclick="salvarOcorrencia()">Registrar</button>
 			<button type="button" class="btn btn-secondary"
-				onclick="document.getElementById('formCadCli').reset();">Novo</button>
+				onclick="limparForm();">Novo</button>
 			<button type="button" class="btn btn-danger" onclick="botaoDeletar()">Excluir</button>
 			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalPesquisar">
 				Pesquisar
 			</button>
 		</form>
+
 	</div>
 
 	<div id="footer"></div>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="./scripts-cliente.js"></script>
+	<script src="./scripts-ocorrencia.js"></script>
 
 
 </body>

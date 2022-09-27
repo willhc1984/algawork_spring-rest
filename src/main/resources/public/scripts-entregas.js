@@ -1,3 +1,7 @@
+function limparForm(){
+	document.getElementById('formSolicitacaoEntrega').reset();
+	$('#msgs').hide();
+}
 
 $(function() {
 	$("#navbar").load("navbar.html");
@@ -71,6 +75,7 @@ function botaoDeletar() {
 	if (id != null && id.trim() != '') {
 		excluirCliente(id);
 		$('#msgs').html("<div class='alert alert-success'>Cliente excluido!</div>");
+		$('#msgs').show();
 		document.getElementById('formCadCli').reset();
 	}
 
@@ -109,9 +114,11 @@ function salvarSolicitacaoEntrega() {
 			$("#id").val(response.id);
 			alert("Solicitação realizada!");
 			$('#msgs').html("<div class='alert alert-success'>Solicitação realizada!</div>");
+			$('#msgs').show();
 		}
 	}).fail(function(xhr, status, errorThrown) {
 		alert("Erro ao solicitar: " + xhr.responseText);
 		$('#msgs').html("<div class='alert alert-danger'>" + xhr.responseText + "</div>");
+		$('#msgs').show();
 	})
 }

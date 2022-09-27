@@ -5,6 +5,27 @@ $(function() {
 	$("#modal").load("modaL-clientes.html");
 });
 
+function listarClientes() {
+	$.ajax({
+		method: "GET",
+		url: "clientes",
+		success: function(response) {
+			document.getElementById('resultados').innerHTML = '';
+			for (var i = 0; i < response.length; i++) {
+				$('#resultados').append('<tr id="' + response[i].id + '">');
+				$('#resultados').append('<td>' + response[i].id + '</td>');
+				$('#resultados').append('<td>' + response[i].nome + '</td>');
+				$('#resultados').append('<td>' + response[i].email + '</td>');
+				$('#resultados').append('<td>' + response[i].telefone + '</td>');
+				$('#resultados').append('<td><a href="#" onClick="excluirCliente(' + response[i].id + ')"><i class="fa-solid fa-trash"></i></a></td>');
+				$('#resultados').append('</tr>');
+			}
+		}
+	}).fail(function(xhr, status, errorThrown) {
+		alert("Erro ao buscar clientes" + xhr.responseText);
+	})
+}
+
 function colocarEmEdicao(id) {
 	$.ajax({
 		method: "GET",
@@ -58,10 +79,13 @@ function excluirCliente(id) {
 			data: "id=" + id,
 			success: function(response) {
 				pesquisarCliente();
+				listarClientes();
+				$('#msgs').html("<div class='alert alert-success'>Cliente excluido!</div>");
 				alert("Cliente excluido!");
 			}
 		}).fail(function(xhr, status, errorThrown) {
 			alert("Erro ao excluir cliente." + xhr.responseText);
+			$('#msgs').html("<div class='alert alert-danger'>"+ xhr.responseText+"</div>");
 		})
 	}
 }
@@ -77,7 +101,7 @@ function botaoDeletar() {
 }
 
 function salvarCliente() {
-	
+
 	var id = $("#id").val();
 	var nome = $("#nome").val();
 	var email = $("#email").val();
