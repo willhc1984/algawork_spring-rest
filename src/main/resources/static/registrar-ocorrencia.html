@@ -7,6 +7,7 @@
 
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./styles.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/312c97e8d7.js" crossorigin="anonymous"></script>
 	<title>Delivery System</title>
 </head>
@@ -16,29 +17,26 @@
 	<div id="navbar"></div>
 	<div id="modal"></div>
 
-	<h1>Registrar ocorrencias</h1>
-	
-	<div style="padding: 30px;">
-		<form method="" id="formRegistrarOcorrencia">
-			<div id="msgs"></div>
-			<div class="mb-3">
-				<label for="id" class="form-label">ID da entrega</label>
-				<input type="number" class="form-control" id="idEntrega" />
-			</div>
-			<div class="mb-3">
-				<label for="descricao" class="form-label">Descrição do ocorrido</label>
-				<input type="text" class="form-control" id="descricao" />
-			</div>
+	<div class="container">
+		<h4>Registrar ocorrencias</h4>
 
-			<button type="button" class="btn btn-primary" onclick="salvarOcorrencia()">Registrar</button>
-			<button type="button" class="btn btn-secondary"
-				onclick="limparForm();">Novo</button>
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalPesquisar">
-				Pesquisar
-			</button>
-		</form>
+		<div style="padding: 30px;">
+			<form method="" id="formRegistrarOcorrencia">
+				<div id="msgs"></div>
+				<div class="mb-3">
+					<label for="id" class="form-label">ID da entrega</label>
+					<input type="number" class="form-control" id="idEntrega" />
+				</div>
+				<div class="mb-3">
+					<label for="descricao" class="form-label">Descrição do ocorrido</label>
+					<input type="text" class="form-control" id="descricao" />
+				</div>
 
+				<button type="button" class="btn btn-primary" onclick="salvarOcorrencia()">Registrar</button>
+				<button type="button" class="btn btn-secondary" onclick="limparForm();">Novo</button>
+			</form>
+
+		</div>
 	</div>
 
 	<div id="footer"></div>

@@ -7,6 +7,7 @@
 
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./styles.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/312c97e8d7.js" crossorigin="anonymous"></script>
 	<title>Delivery System</title>
 </head>
@@ -14,33 +15,36 @@
 <body>
 
 	<div id="navbar"></div>
-	<h1>Clientes cadastrados</h1>
-	
-	<div id="msgs"></div>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Nome</th>
-				<th scope="col">Email</th>
-				<th scope="col">Telefone</th>
-				<th scope="col">Ações</th>
-			</tr>
-		</thead>
+	<div class="container">
+		<h4>Clientes cadastrados</h4>
 
-		<tbody id="resultados">
+		<div id="msgs"></div>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Email</th>
+					<th scope="col">Telefone</th>
+					<th scope="col">Ações</th>
+				</tr>
+			</thead>
 
-		</tbody>
-	</table>
+			<tbody id="resultados">
+
+			</tbody>
+		</table>
 	</div>
+
 
 	<div id="footer"></div>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./scripts-cliente.js"></script>
-	
+
 	<script>
 		listarClientes();
 	</script>

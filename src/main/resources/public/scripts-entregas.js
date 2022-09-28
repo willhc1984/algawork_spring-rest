@@ -25,6 +25,7 @@ function listarEntregas() {
 		success: function(response) {
 			document.getElementById('resultados').innerHTML = '';
 			for (var i = 0; i < response.length; i++) {
+				moment.locale('pt-br');
 				$('#resultados').append('<tr id="' + response[i].id + '">');
 				$('#resultados').append('<td>' + response[i].id + '</td>');
 				$('#resultados').append('<td>' + response[i].cliente.nome + '</td>');
@@ -34,10 +35,10 @@ function listarEntregas() {
 				$('#resultados').append('<td>' + response[i].destinatario.numero + '</td>');
 				$('#resultados').append('<td>' + response[i].destinatario.complemento + '</td>');
 				$('#resultados').append('<td>' + response[i].taxa + '</td>');
-				$('#resultados').append('<td>' + response[i].dataPedido + '</td>');
-				$('#resultados').append('<td>' + response[i].dataFinalizacao + '</td>');
+				$('#resultados').append('<td>' + moment(response[i].dataPedido).format('DD-MM-YY') + '</td>');
+				$('#resultados').append('<td>' + moment(response[i].dataFinalizacao).format('DD-MM-YY') + '</td>');
 				$('#resultados').append('<td>' + response[i].status + '</td>');
-				$('#resultados').append('<td><a href="#" onClick="finalizarEntrega(' + response[i].id + ')"><i class="fa-solid fa-square-check" data-toggle="tooltip" data-placement="top" title="Finalizar pedido"></i></a></td>');
+				$('#resultados').append('<td><a href="#" onClick="finalizarEntrega(' + response[i].id + ')"><i class="fa-solid fa-square-check" data-toggle="tooltip" data-placement="top" title="Finalizar entrega"></i></a></td>');
 				$('#resultados').append('</tr>');
 			}
 		}
@@ -103,6 +104,7 @@ function salvarSolicitacaoEntrega() {
 			alert("Solicitação realizada!");
 			$('#msgs').html("<div class='alert alert-success'>Solicitação realizada!</div>");
 			$('#msgs').show();
+			document.getElementById('formSolicitacaoEntrega').reset();
 		}
 	}).fail(function(xhr, status, errorThrown) {
 		alert("Erro ao solicitar: " + xhr.responseText);

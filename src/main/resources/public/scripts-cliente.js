@@ -78,16 +78,17 @@ function excluirCliente(id) {
 			url: "clientes/" + id,
 			data: "id=" + id,
 			success: function(response) {
-				pesquisarCliente();
-				listarClientes();
+				//pesquisarCliente();
+				//listarClientes();
 				$('#msgs').html("<div class='alert alert-success'>Cliente excluido!</div>");
 				alert("Cliente excluido!");
 				$('#msgs').show();
 			}
 		}).fail(function(xhr, status, errorThrown) {
-			alert("Erro ao excluir cliente." + xhr.responseText);
-			$('#msgs').html("<div class='alert alert-danger'>"+ xhr.responseText+"</div>");
-			$('#msgs').show();
+			var data = xhr.responseJSON;
+			alert("Erro ao excluir cliente." + data.titulo);
+			$('#msgs').html("<div class='alert alert-danger'>"+ data.titulo+"</div>");
+			//$('#msgs').show();
 		})
 	}
 }
@@ -96,7 +97,6 @@ function botaoDeletar() {
 	var id = $("#id").val();
 	if (id != null && id.trim() != '') {
 		excluirCliente(id);
-		$('#msgs').html("<div class='alert alert-success'>Cliente excluido!</div>");
 		document.getElementById('formCadCli').reset();
 		$('#msgs').show();
 	}
@@ -126,8 +126,8 @@ function salvarCliente() {
 			$('#msgs').show();
 		}
 	}).fail(function(xhr, status, errorThrown) {
-		alert("Erros ao cadastrar cliente " + xhr.responseText);
-		$('#msgs').html("<div class='alert alert-danger'>" + xhr.responseText + "</div>");
+		var data = xhr.responseJSON;
+		$('#msgs').html("<div class='alert alert-danger'>" +  data.titulo + "</div>");
 		$('#msgs').show();
 	})
 }

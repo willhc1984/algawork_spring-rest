@@ -15,3 +15,9 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+@media (min-width: 768px) { 
+	.container{
+	padding: 15px;
+	}	
+}
