@@ -1,3 +1,9 @@
+$(function() {
+	$("#navbar").load("navbar.html");
+	$("#footer").load("footer.html");
+	$("#modal").load("modal-ocorrencias.html");
+});
+
 function limparForm() {
 	document.getElementById('formSolicitacaoEntrega').reset();
 	$('#msgs').hide();
@@ -15,6 +21,7 @@ function finalizarEntrega(id) {
 	}).fail(function(xhr, status, errorThrown) {
 		alert("Entrega já está finalizada!" + xhr.responseText);
 		$("#msgs").html("<div class='alert alert-danger'>Entrega já está finalizada!</div>");
+		listarEntregas();
 	})
 }
 
@@ -26,32 +33,27 @@ function listarEntregas() {
 			document.getElementById('resultados').innerHTML = '';
 			for (var i = 0; i < response.length; i++) {
 				moment.locale('pt-br');
-				$('#resultados').append('<tr id="' + response[i].id + '">');
-				$('#resultados').append('<td>' + response[i].id + '</td>');
-				$('#resultados').append('<td>' + response[i].cliente.nome + '</td>');
-				$('#resultados').append('<td>' + response[i].destinatario.nome + '</td>');
-				$('#resultados').append('<td>' + response[i].destinatario.logradouro + '</td>');
-				$('#resultados').append('<td>' + response[i].destinatario.bairro + '</td>');
-				$('#resultados').append('<td>' + response[i].destinatario.numero + '</td>');
-				$('#resultados').append('<td>' + response[i].destinatario.complemento + '</td>');
-				$('#resultados').append('<td>' + response[i].taxa + '</td>');
-				$('#resultados').append('<td>' + moment(response[i].dataPedido).format('DD-MM-YY') + '</td>');
-				$('#resultados').append('<td>' + moment(response[i].dataFinalizacao).format('DD-MM-YY') + '</td>');
-				$('#resultados').append('<td>' + response[i].status + '</td>');
-				$('#resultados').append('<td><a href="#" onClick="finalizarEntrega(' + response[i].id + ')"><i class="fa-solid fa-square-check" data-toggle="tooltip" data-placement="top" title="Finalizar entrega"></i></a></td>');
-				$('#resultados').append('</tr>');
+				$('#tabela > tbody').append('<tr id="' + response[i].id + '">');
+				$('#tabela > tbody').append('<td>' + response[i].id + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].cliente.nome + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].destinatario.nome + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].destinatario.logradouro + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].destinatario.bairro + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].destinatario.numero + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].destinatario.complemento + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].taxa + '</td>');
+				$('#tabela > tbody').append('<td>' + moment(response[i].dataPedido).format('DD-MM-YY') + '</td>');
+				$('#tabela > tbody').append('<td>' + moment(response[i].dataFinalizacao).format('DD-MM-YY') + '</td>');
+				$('#tabela > tbody').append('<td>' + response[i].status + '</td>');
+				//$('#tabela > tbody').append('<td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalPesquisar"><i class="fa-solid fa-square-check" data-toggle="tooltip" data-placement="top" title="Visualizar ocorrencias"></i></button></td>');
+				//$('#tabela > tbody').append('<td><button type="button" class="btn btn-info" onClick="finalizarEntrega(' + response[i].id + ')""><i class="fa-solid fa-square-check" data-toggle="tooltip" data-placement="top" title="Finalizar entrega"></i></button></td>');
+				$('#tabela > tbody').append('</tr>');
 			}
 		}
 	}).fail(function(xhr, status, errorThrown) {
 		alert("Erro ao buscar clientes" + xhr.responseText);
-	})
+	})	
 }
-
-$(function() {
-	$("#navbar").load("navbar.html");
-	$("#footer").load("footer.html");
-	$("#modal").load("modaL-clientes.html");
-});
 
 function excluirSolicitacaoEntrega(id) {
 
@@ -62,7 +64,7 @@ function excluirSolicitacaoEntrega(id) {
 			data: "id=" + id,
 			success: function(response) {
 				//pesquisarCliente();
-				alert("Cliente excluido!");
+				alert("Solicitação excluida!");
 			}
 		}).fail(function(xhr, status, errorThrown) {
 			alert("Erro ao excluir solicitação de entrega!." + xhr.responseText);

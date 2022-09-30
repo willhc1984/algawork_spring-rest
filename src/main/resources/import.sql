@@ -1,10 +1,10 @@
 INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Joselito', 'joselito@teste.com', '1547856965');
 INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Maria Silva', 'maria@teste.com', '1541256988');
-INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Carlos Andrade', 'carlos@teste.com', '56325478');
-INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Silvia Souza', 'silvia@teste.com', '25412589');
-INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Silvia Albuquerque', 'silviaalb@teste.com', '46546');
+INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Carlos Andrade', 'carlos@teste.com', '1532658745');
+INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Silvia Souza', 'silvia@teste.com', '1547856325');
+INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Silvia Albuquerque', 'silviaalb@teste.com', '1547896523');
 INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Maria Joana', 'mj@teste.com', '25412589');
-INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Ana Paula Souza', 'apss@teste.com', '324567');
+INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Ana Paula Souza', 'apss@teste.com', '1523665478');
 INSERT INTO tb_cliente(nome, email, telefone) VALUES ('Carlos Alberto', 'carloalb@teste.com', '2523412589');
 INSERT INTO tb_cliente(nome, email, telefone) VALUES ('João Paulo Cesar', 'jp@teste.com', '36542587');
 

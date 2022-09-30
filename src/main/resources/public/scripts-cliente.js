@@ -2,7 +2,7 @@
 $(function() {
 	$("#navbar").load("navbar.html");
 	$("#footer").load("footer.html");
-	$("#modal").load("modaL-clientes.html");
+	$("#modal").load("modal-clientes.html");
 });
 
 function listarClientes() {
@@ -78,8 +78,7 @@ function excluirCliente(id) {
 			url: "clientes/" + id,
 			data: "id=" + id,
 			success: function(response) {
-				//pesquisarCliente();
-				//listarClientes();
+				listarClientes();
 				$('#msgs').html("<div class='alert alert-success'>Cliente excluido!</div>");
 				alert("Cliente excluido!");
 				$('#msgs').show();
