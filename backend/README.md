@@ -3,7 +3,7 @@
 
 # Sobre o projeto
 
-API REST desenvolvida com SpringFramework. Essa aplicação esta baseada no diagrama UML abaixo - semana Mergulho Spring REST (AlgaWorks).
+API REST desenvolvida com SpringFramework e HTML/CSS/Javascript no front-end. Essa aplicação esta baseada no diagrama UML abaixo - semana Mergulho Spring REST (AlgaWorks).
 
 ## UML - Modelo conceitual
 ![Mobile 1](crud_rest_algaworks.png)
@@ -16,6 +16,10 @@ API REST desenvolvida com SpringFramework. Essa aplicação esta baseada no diag
 - Maven
 - Banco de dados H2.
 - Spring Tool Suite 4
+
+## Front end
+- HTML/CSS/Javascript
+- Bootstrap/Jquery
 
 # Autor
 
