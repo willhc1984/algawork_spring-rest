@@ -8,6 +8,12 @@ API REST desenvolvida com SpringFramework e HTML/CSS/Javascript no front-end. Es
 ## UML - Modelo conceitual
 ![Mobile 1](crud_rest_algaworks.png)
 
+## Executando o projeto
+- git clone https://github.com/willhc1984/algawork_spring-rest
+- cd semana_springrest
+- docker build -t spring-app .
+- docker run -p 8080:8080 spring-app
+
 # Tecnologias utilizadas
 ## Back end
 - Java 17
