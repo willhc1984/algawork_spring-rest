@@ -10,12 +10,6 @@ import com.algaworks.springrest.repositories.EntregaRepository;
 
 @SpringBootApplication
 public class SemanaSpringrestApplication implements CommandLineRunner {
-	
-	@Autowired
-	private ClienteRepository clienteRepository;
-	
-	@Autowired
-	private EntregaRepository entregaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SemanaSpringrestApplication.class, args);
